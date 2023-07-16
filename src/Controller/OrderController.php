@@ -43,10 +43,10 @@ class OrderController extends AbstractController
                 foreach ($cart_items as $key => $cart_item) {
                     $orderItem = new OrderItem();
                     $product = $em->find(SanPham::class,$cart_item->getProduct()->getId());
-                    $orderItem->setItem($product);
+                    $orderItem->setProduct($product);
                     $orderItem->setQuantity($cart_item->quantity);
                     $orderItem->setPrice($cart_item->getProduct()->getPrice());
-                    $orderItem->setO($order);
+                    $orderItem->setOrderRef($order);
                     $em->persist($orderItem);
                     $em->flush();
                 }
@@ -55,9 +55,9 @@ class OrderController extends AbstractController
                 $session->set('cart', new CartManager());
             } catch (Exception $e) {
                 $em->getConnection()->rollBack();
-                return new RedirectResponse($this->urlGenerator->generate('app_order',["message"=>"Lỗi! Không thể tạo đơn hàng"]));
+                return new RedirectResponse($this->urlGenerator->generate('app_order',["message"=>"Error! Unable to create order"]));
             }
-            return new RedirectResponse($this->urlGenerator->generate('app_ds_san_pham',["message"=>"Tạo đơn hàng thành công"]));
+            return new RedirectResponse($this->urlGenerator->generate('homepage',["message"=>"Successful order creation"]));
         }
 
         return $this->render('order/index.html.twig', [

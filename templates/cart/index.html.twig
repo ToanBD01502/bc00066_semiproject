@@ -18,7 +18,7 @@
                                     </div>
                                     <hr class="my-4">
 
-                                    {% for item in cart %}
+                                    {% for item in cart_manager.items %}
                                     <div class="row mb-5 d-flex justify-content-between align-items-center">
                                         <div class="col-md-3 col-lg-3 col-xl-3">
                                             <img src="{{ asset('uploads/sanpham/' ~ (item.product.photo)) }}" class="img-fluid rounded-3">
@@ -56,13 +56,11 @@
 
                                     <div class="d-flex justify-content-between mb-5">
                                         <h5 class="text-uppercase">Total price</h5>
-                                        {% for item in cart %}
-                                        <h5>{{ item.amount }} $</h5>
-                                        {% endfor %}
+                                        <h5>{{cart_manager.amount}} $</h5>
                                     </div>
 
-                                    <button type="button" class="btn btn-danger btn-block rounded-1"
-                                        data-mdb-ripple-color="light">Check out</button>
+                                    <a href="{{path('app_order')}}"><button type="button" class="btn btn-danger btn-block rounded-1"
+                                        data-mdb-ripple-color="light">Check out</button></a>
                                 </div>
                             </div>
                         </div>
