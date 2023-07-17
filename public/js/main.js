@@ -18,6 +18,24 @@
         $(window).resize(toggleNavbarMethod);
     });
     
+    $(document).ready(function() {
+        $("#add-to-cart").click(function() {
+          // Get the product ID from the button's data-product-id attribute.
+          var productId = $(this).data("product-id");
+      
+          // Add the product to the cart.
+          $.ajax({
+            url: "/cart/add",
+            data: {
+              productId: productId
+            },
+            success: function() {
+              // Show a success message.
+              alert("Product added to cart.");
+            }
+          });
+        });
+      });    
     
     // Back to top button
     $(window).scroll(function () {

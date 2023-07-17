@@ -12,9 +12,17 @@ use App\Entity\User;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Form\UserType;
 
 class HomepageController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     #[Route('/feature', name: 'feature_product')]
     public function viewdetail(EntityManagerInterface $em): Response
     {
@@ -46,7 +54,7 @@ class HomepageController extends AbstractController
     }
     
     #[Route('/', name: 'homepage')]
-    public function cate(EntityManagerInterface $em): Response
+    public function cate(EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): Response
     {
         $query = $em->createQuery('SELECT category FROM App\Entity\Category category');
         $category = $query->getResult();
@@ -56,9 +64,10 @@ class HomepageController extends AbstractController
 
         return $this->render('homepage/index.html.twig', [
             'category' => $category,
-            'data'=>$lSp
+            'data'=>$lSp,
         ]);
     }
+
     #[Route('/category/{id}', name: 'app_productofcate')]
     public function viewCategoryProducts(EntityManagerInterface $em, int $id, Request $request): Response
     {
@@ -68,6 +77,7 @@ class HomepageController extends AbstractController
             "data"=>$lSp
         ]);
     }
+
     #[Route('/profile', name: 'profile')]
     public function profile()
     {
@@ -76,5 +86,32 @@ class HomepageController extends AbstractController
         return $this->render('homepage/profile.html.twig', [
             'user' => $user,
         ]);
+    }
+
+    #[Route('/profile/edit', name: 'edit_profile')]
+    public function editProfile(Request $request): Response
+    {
+        $user = $this->getUser();
+
+        if ($request->isMethod('POST')) {
+            $user->setFirstName($request->request->get('first_name'));
+            $user->setLastName($request->request->get('last_name'));
+
+            return $this->redirectToRoute('profile');
+        }
+
+        return $this->render('homepage/settings.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    #[Route('/search', name: 'search_products')]
+    public function search(Request $request): Response
+    {
+        $keyword = $request->query->get('keyword');
+
+        $products = $this->entityManager->getRepository(SanPham::class)->findByKeyword($keyword);
+
+        return $this->render('homepage/sanpham.html.twig', ['data' => $products]);
     }
 }

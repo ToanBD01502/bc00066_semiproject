@@ -40,6 +40,15 @@ class SanPhamRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByKeyword($keyword)
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.name LIKE :keyword')
+            ->setParameter('keyword', '%'.$keyword.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return SanPham[] Returns an array of SanPham objects
 //     */
