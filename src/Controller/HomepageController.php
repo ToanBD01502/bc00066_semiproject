@@ -96,6 +96,8 @@ class HomepageController extends AbstractController
         if ($request->isMethod('POST')) {
             $user->setFirstName($request->request->get('first_name'));
             $user->setLastName($request->request->get('last_name'));
+            $user->setAddress($request->request->get('address'));
+            $user->setPhoneNumber($request->request->get('phone_number'));
 
             return $this->redirectToRoute('profile');
         }

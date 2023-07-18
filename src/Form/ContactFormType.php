@@ -19,9 +19,7 @@ class ContactFormType extends AbstractType
             ->add('name', TextType::class)
             ->add('email', EmailType::class)
             ->add('message', TextareaType::class)
-            ->add('submit', SubmitType::class, [
-                'label' => 'Submit',
-            ]);
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
