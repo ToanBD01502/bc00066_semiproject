@@ -40,19 +40,17 @@
         <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
           <div class="navbar-nav w-100">
             <div class="nav-item dropdown dropright">
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">DESKTOPS <i class="fa fa-angle-right float-right mt-1"></i></a>
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Computer Accessories<i class="fa fa-angle-right float-right mt-1"></i></a>
               <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                <a href="" class="dropdown-item">PC GAMING</a>
-                <a href="" class="dropdown-item">PC OFFICE</a>
-                <a href="" class="dropdown-item">PC GRAPHICS</a>
-                <a href="" class="dropdown-item">PC WORKSTATION</a>
+                <a href="{{ path('app_productofcate', {'id': 30}) }}" class="dropdown-item">Case PC</a>
+                <a href="{{ path('app_productofcate', {'id': 22}) }}" class="dropdown-item">Screen</a>
+                <a href="{{ path('app_productofcate', {'id': 28}) }}" class="dropdown-item">RAM</a>
+                <a href="{{ path('app_productofcate', {'id': 27}) }}" class="dropdown-item">Graphic Card</a>
               </div>
             </div>
-            <a href="" class="nav-item nav-link">LAPTOPS</a>
-            <a href="" class="nav-item nav-link">COMPUTER SCREEN</a>
-            <a href="" class="nav-item nav-link">KEYBOARD</a>
-            <a href="" class="nav-item nav-link">MOUSE</a>
-            <a href="" class="nav-item nav-link">HEADPHONES, SPEAKER</a>
+            <a href="{{ path('app_productofcate', {'id': 23}) }}" class="nav-item nav-link">Laptops</a>
+            <a href="{{ path('app_productofcate', {'id': 21}) }}" class="nav-item nav-link">Desktops</a>
+            <a href="{{ path('app_productofcate', {'id': 24}) }}" class="nav-item nav-link">Mouses</a>
           </div>
         </nav>
       </div>

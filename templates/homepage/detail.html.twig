@@ -31,7 +31,11 @@
                 <span class="star-icon"><i class="fa fa-star"></i></span>
                 <span class="star-icon"><i class="fa fa-star"></i></span>
             </div>
-            <button class="btn btn-danger rounded-1 mt-3">Add to Cart</button>
+            <form method="post" action="{{ path('app_cart_add', {'product_id': data.getId()}) }}">
+                <button class="btn btn-danger rounded-2 pl-3 pr-3" type="submit" id="add-to-cart">
+                    Add to Cart
+                </button>
+            </form>  
         </div>
     </div>
 </div>

@@ -89,7 +89,7 @@ class HomepageController extends AbstractController
     }
 
     #[Route('/profile/edit', name: 'edit_profile')]
-    public function editProfile(Request $request): Response
+    public function editProfile(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
 
@@ -97,8 +97,9 @@ class HomepageController extends AbstractController
             $user->setFirstName($request->request->get('first_name'));
             $user->setLastName($request->request->get('last_name'));
             $user->setAddress($request->request->get('address'));
-            $user->setPhoneNumber($request->request->get('phone_number'));
-
+            $user->setPhonenumber($request->request->get('phone_number'));
+            $entityManager->flush();
+        
             return $this->redirectToRoute('profile');
         }
 
