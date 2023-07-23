@@ -20,7 +20,6 @@
             <div class="col-md-8">
               <div class="card-body p-4">
                 <h5>Your information</h5>
-                <span><a href="{{ path('edit_profile') }}">Edit Profile<a/></span>
                 <hr class="mt-0 mb-4">
                 <div class="row pt-1">
                   <div class="col-6 mb-3">
@@ -43,11 +42,15 @@
                     <p class="text-muted">{{ user.phonenumber }}</p>
                   </div>
                 </div>
-                <div class="d-flex justify-content-start">
+                <div class="d-flex justify-content-start ml-4">
                   <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
                   <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
                   <a href="#!"><i class="fab fa-instagram fa-lg me-3"></i></a>
                 </div>
+                <div class="container-fluid mt-3">
+                  <span>
+                    <a href="{{ path('edit_profile') }}" class="btn btn-outline-danger btn-light rounded-2">Edit Profile</a>
+                </span>
               </div>
             </div>
           </div>
