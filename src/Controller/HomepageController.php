@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Form\UserType;
+use Knp\Component\Pager\PaginatorInterface;
 
 class HomepageController extends AbstractController
 {
@@ -54,7 +55,7 @@ class HomepageController extends AbstractController
     }
     
     #[Route('/', name: 'homepage')]
-    public function cate(EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): Response
+    public function cate(EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator, PaginatorInterface $paginator, Request $request): Response
     {
         $query = $em->createQuery('SELECT category FROM App\Entity\Category category');
         $category = $query->getResult();
@@ -62,9 +63,15 @@ class HomepageController extends AbstractController
         $query = $em->createQuery('SELECT sp FROM App\Entity\SanPham sp');
         $lSp = $query->getResult();
 
+        $pagination = $paginator->paginate(
+            $lSp, 
+            $request->query->getInt('page', 1),
+            12
+        );
+
         return $this->render('homepage/index.html.twig', [
             'category' => $category,
-            'data'=>$lSp,
+            'data' => $pagination,
         ]);
     }
 
