@@ -66,7 +66,7 @@ class HomepageController extends AbstractController
         $pagination = $paginator->paginate(
             $lSp, 
             $request->query->getInt('page', 1),
-            12
+            8
         );
 
         return $this->render('homepage/index.html.twig', [

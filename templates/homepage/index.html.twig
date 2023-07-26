@@ -147,17 +147,24 @@
                 </div><div class="row px-xl-5">
             {% endif %}
         {% endfor %}
-        <div class="container-fluid">
-            <div class="row px-xl-5 justify-content-center">
-                <div class="col-1 m-2" style="font-size: large; font-weight: bold;">
-                    {{ knp_pagination_render(data) }}
-                </div>
-            </div>
-        </div>
+        <div class="pagination justify-content-center p-3">
+            {% set pageCount = data.pageCount %}
+            {% set currentPage = data.current %}
+            
+            {% if currentPage != 1 %}
+                <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'page': 1})) }}" class="btn btn-outline-danger btn-light rounded-2 pl-3 pr-3 mx-1">First</a>
+            {% endif %}
+        
+            {% for page in 1..pageCount %}
+                {% if currentPage != page %}
+                    <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'page': page})) }}" class="btn btn-outline-danger btn-light rounded-3 pl-3 pr-3 mx-1">{{ page }}</a>
+                {% else %}
+                    <span class="btn btn-outline-danger btn-light rounded-3 pl-3 pr-3 mx-1 active">{{ page }}</span>
+                {% endif %}
+            {% endfor %}
+                <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'page': pageCount})) }}" class="btn btn-outline-danger btn-light rounded-2 pl-3 pr-3 mx-1">Last</a>
+        </div>                                                                                       
     </div>
 </div>
 <!-- Products End -->
-
-{# Pagination links #}
-
 {% endblock %}
